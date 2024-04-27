@@ -65,7 +65,6 @@ def prompt(query):
 
 
 st.title("📓 Matt's Black Book")
-resp = st.text_input("Enter your query here", key="query")
-if st.button("Submit"):
+if resp := st.text_input("Enter your query here", key="query"):
     response = prompt(resp)
     st.write(response["response"])
