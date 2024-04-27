@@ -3,6 +3,9 @@
 ## Development
 
 ```sh
+# Install dependencies
+pip install -r requirements.txt
+
 # Init the vectorstore first with a sample.csv file saved in /data folder
 python db.py
 
@@ -10,5 +13,5 @@ python db.py
 python dummy.py
 
 # Then run your app
-python app.py
+streamlit run app.py
 ```

@@ -1,7 +1,8 @@
 import os
 from dotenv import load_dotenv
-from flask_cors import CORS
-from flask import Flask, request
+# from flask_cors import CORS
+# from flask import Flask, request
+import streamlit as st
 
 from langchain_text_splitters import CharacterTextSplitter
 from langchain_openai import ChatOpenAI
@@ -34,14 +35,11 @@ PROMPT = ChatPromptTemplate.from_messages(
     [("system", SYSTEM_PROMPT), ("human", "{input}")]
 )
 
-app = Flask(__name__)
-CORS(app)
+# app = Flask(__name__)
+# CORS(app)
 
 
-@app.route('/prompt', methods=['POST'])
-def prompt():
-    # Get prompt from request data
-    query = request.json['query']
+def prompt(query):
     # retrieval_qa_chat_prompt = hub.pull("langchain-ai/retrieval-qa-chat")
     print(query)
 
@@ -63,6 +61,8 @@ def prompt():
     return {"response": output["answer"]}
 
 
-if __name__ == "__main__":
-    load_db()
-    app.run(port=8000, debug=True)
+st.title("📓 Matt's Black Book")
+resp = st.text_input("Enter your query here", key="query")
+if st.button("Submit"):
+    response = prompt(resp)
+    st.write(response)
