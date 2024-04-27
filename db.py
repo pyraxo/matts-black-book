@@ -9,7 +9,8 @@ embedding_function = SentenceTransformerEmbeddings(
 
 
 def init_db():
-    loader = CSVLoader(file_path='./data/sample.csv', source_column="Car")
+    loader = CSVLoader(file_path='./data/output.csv',
+                       source_column="Vehicle_Title")
     data = loader.load()
     db = FAISS.from_documents(data, embedding_function)
     db.save_local("reviews")

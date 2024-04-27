@@ -25,10 +25,13 @@ text_splitter = CharacterTextSplitter(
 )
 
 SYSTEM_PROMPT = (
-    "Use the given context to answer the question. "
-    "If you don't know the answer, say you don't know. "
-    "Use three sentence maximum and keep the answer concise."
+    "You are a helpful AI car salesman. A user is looking for a car. "
+    "The provided context is a dataset containing car models that is related to the preferences of the user. "
+    "The dataset includes the specific car model and the summarized review of the particular car. "
+    "Please analyse the cars and its reviews and preferences of the users and return the best 5 cars they should consider. "
+    "----------------"
     "{context}"
+    "----------------"
 )
 
 PROMPT = ChatPromptTemplate.from_messages(
@@ -65,4 +68,4 @@ st.title("📓 Matt's Black Book")
 resp = st.text_input("Enter your query here", key="query")
 if st.button("Submit"):
     response = prompt(resp)
-    st.write(response)
+    st.write(response["response"])
